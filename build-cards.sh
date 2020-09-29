@@ -182,7 +182,7 @@ usbdev[0-9].[0-9]_.*    root:root 0660
 EOF
 
 # Create GRUB configuration
-cat <<'EOF' >> ${CARDS}/boot/grub/grub.cfg
+cat >  ${CARDS}/boot/grub/grub.cfg << "EOF"
 
 set default=0
 set timeout=5
