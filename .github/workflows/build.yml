@@ -37,6 +37,7 @@ jobs:
 
           chmod +x ./build-packages.sh
           chmod +x ./build-cards.sh
+          ./build-packages.sh
           ./build-cards.sh
 
       - name: Upload disk image
