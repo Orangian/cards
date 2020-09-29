@@ -186,6 +186,9 @@ cat <<'EOF' >> ${CARDS}/boot/grub/grub.cfg
 set default=0
 set timeout=5
 set root=(hd0,1)
+search --file --set=root /.disk/info
+set prefix=($root)/dev/loop0/boot/grub
+source $prefix/x86_64-efi/grub.cfg
 menuentry "Cards" {
         linux   /boot/vmlinuz-${LINUX_VERSION} root=/dev/sda1 ro quiet
 }
@@ -363,9 +366,12 @@ sudo chmod 4755 ${CARDS}-copy/bin/busybox
 # Get Clover EFI Files
 git clone https://github.com/badruzeus/CloverEFI-4MU
 pwd
-mkdir /home/runner/work/cards/cards/boot
-mkdir /home/runner/work/cards/cards/boot/EFI
-cp -r /home/runner/work/cards/cards/CloverEFI-4MU/EFI /home/runner/work/cards/cards/boot/EFI
+mkdir /dev/loop0/boot
+mkdir /dev/loop0/boot/EFI
+mkdir /dev/loop0/EFI
+mkdir /dev/loop0/EFI/boot
+mkdir /dev/loop0/EFI/cards
+cp -r /home/runner/work/cards/cards/CloverEFI-4MU/EFI mkdir /dev/loop0/boot/EFI
 ls 
 dir /home/runner/work/cards/cards
 # Create log files
@@ -386,6 +392,12 @@ sudo mount -o loop /dev/loop0 loopfs # Mount loop device to ./loopfs
 cd loopfs/
 sudo tar xJf ../cards.tar.xz # Uncompress build into loop device
 sudo grub-install --root-directory=${CARDS}-copy/../loopfs /dev/loop0 # Install GRUB into loop device
+cp -r -n /home/runner/work/cards/cards/boot ${CARDS}-copy/../loopfs/boot
+cp -r -n /home/runner/work/cards/cards/cards ${CARDS}-copy/../loopfs/boot/cards
+cp -r -n /home/runner/work/cards/cards/boot ${CARDS}-copy/../loopfs/EFI/boot
+cp -r -n /home/runner/work/cards/cards/cards ${CARDS}-copy/../loopfs/EFI/cards
+cp -r -n /home/runner/work/cards/cards/EFI ${CARDS}-copy/../loopfs/EFI
+cp -r -n /home/runner/work/cards/cards/grub ${CARDS}-copy/../loopfs/grub
 
 # Create final disk image
 cd ${CARDS}-copy/
