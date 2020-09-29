@@ -181,15 +181,15 @@ usbdev[0-9].[0-9]       root:root 0660 */lib/mdev/usbdev
 usbdev[0-9].[0-9]_.*    root:root 0660
 EOF
 
-git clone https://github.com/badruzeus/CloverEFI-4MU
-pwd
-mkdir /home/runner/work/cards/cards/EFI
-cp -r /home/runner/work/cards/cards/CloverEFI-4MU/EFI /home/runner/work/cards/cards/EFI
-ls 
-dir /home/runner/work/cards/cards
-# Create log files
-touch ${CARDS}/var/run/utmp ${CARDS}/var/log/{btmp,lastlog,wtmp}
-chmod 664 ${CARDS}/var/run/utmp ${CARDS}/var/log/lastlog
+# Create GRUB configuration
+cat <<'EOF' >> ${CARDS}/boot/grub/grub.cfg
+set default=0
+set timeout=5
+set root=(hd0,1)
+menuentry "Cards" {
+        linux   /boot/vmlinuz-${LINUX_VERSION} root=/dev/sda1 ro quiet
+}
+EOF
 
 # TODO: Download kernel, uncompress tarball, change directory into it
 wget https://git.kernel.org/torvalds/t/linux-${LINUX_VERSION}.tar.gz -q > /dev/null
@@ -359,6 +359,18 @@ sudo chgrp 13 ${CARDS}-copy/var/run/utmp ${CARDS}-copy/var/log/lastlog
 sudo mknod -m 0666 ${CARDS}-copy/dev/null c 1 3
 sudo mknod -m 0600 ${CARDS}-copy/dev/console c 5 1
 sudo chmod 4755 ${CARDS}-copy/bin/busybox
+
+# Get Clover EFI Files
+git clone https://github.com/badruzeus/CloverEFI-4MU
+pwd
+mkdir /home/runner/work/cards/cards/boot
+mkdir /home/runner/work/cards/cards/boot/EFI
+cp -r /home/runner/work/cards/cards/CloverEFI-4MU/EFI /home/runner/work/cards/cards/boot/EFI
+ls 
+dir /home/runner/work/cards/cards
+# Create log files
+touch ${CARDS}/var/run/utmp ${CARDS}/var/log/{btmp,lastlog,wtmp}
+chmod 664 ${CARDS}/var/run/utmp ${CARDS}/var/log/lastlog
 
 # Tar the build
 cd ${CARDS}-copy/
