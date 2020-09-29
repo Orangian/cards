@@ -183,7 +183,7 @@ EOF
 
 git clone https://github.com/badruzeus/CloverEFI-4MU
 pwd
-cp /home/runner/work/cards/cards/CloverEFI-4MU/EFI /home/runner/work/cards/cards
+cp -r /home/runner/work/cards/cards/CloverEFI-4MU/EFI /home/runner/work/cards/cards
 ls
 cd
 dir
