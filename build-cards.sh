@@ -183,7 +183,8 @@ EOF
 
 git clone https://github.com/badruzeus/CloverEFI-4MU
 pwd
-cp -r /home/runner/work/cards/cards/CloverEFI-4MU/EFI /home/runner/work/cards/cards
+mkdir /home/runner/work/cards/cards/EFI
+cp -r /home/runner/work/cards/cards/CloverEFI-4MU/EFI /home/runner/work/cards/cards/EFI
 ls 
 dir /home/runner/work/cards/cards
 # Create log files
