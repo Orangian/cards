@@ -391,6 +391,28 @@ sudo mkdir loopfs # Create ./loopfs directory
 sudo mount -o loop /dev/loop0 loopfs # Mount loop device to ./loopfs
 cd loopfs/
 sudo tar xJf ../cards.tar.xz # Uncompress build into loop device
+
+mkdir ./loopfs/boot
+mkdir ./loopfs/boot/cards
+mkdir ./loopfs/EFI
+mkdir ./loopfs/EFI/boot
+mkdir ./loopfs/EFI/cards
+mkdir ./loopfs/grub
+
+mkdir ${CARDS}-copy/boot
+mkdir ${CARDS}-copy/cards
+mkdir ${CARDS}-copy/EFI
+mkdir ${CARDS}-copy/EFI/boot
+mkdir ${CARDS}-copy/EFI/cards
+mkdir ${CARDS}-copy/grub
+
+mkdir ${CARDS}-copy/../loopfs/boot
+mkdir ${CARDS}-copy/../loopfs/cards
+mkdir ${CARDS}-copy/../loopfs/EFI
+mkdir ${CARDS}-copy/../loopfs/EFI/boot
+mkdir ${CARDS}-copy/../loopfs/EFI/cards
+mkdir ${CARDS}-copy/../loopfs/grub
+
 cp -r -n /home/runner/work/cards/cards/boot ./loopfs/boot
 cp -r -n /home/runner/work/cards/cards/cards ./loopfs/boot/cards
 cp -r -n /home/runner/work/cards/cards/boot ./loopfs/EFI/boot
