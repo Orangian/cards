@@ -391,13 +391,29 @@ sudo mkdir loopfs # Create ./loopfs directory
 sudo mount -o loop /dev/loop0 loopfs # Mount loop device to ./loopfs
 cd loopfs/
 sudo tar xJf ../cards.tar.xz # Uncompress build into loop device
-sudo grub-install --root-directory=${CARDS}-copy/../loopfs /dev/loop0 # Install GRUB into loop device
+cp -r -n /home/runner/work/cards/cards/boot ./loopfs/boot
+cp -r -n /home/runner/work/cards/cards/cards ./loopfs/boot/cards
+cp -r -n /home/runner/work/cards/cards/boot ./loopfs/EFI/boot
+cp -r -n /home/runner/work/cards/cards/cards ./loopfs/EFI/cards
+cp -r -n /home/runner/work/cards/cards/EFI ./loopfs/EFI
+cp -r -n /home/runner/work/cards/cards/grub ./loopfs/grub
+
+cp -r -n /home/runner/work/cards/cards/boot ${CARDS}-copy/boot
+cp -r -n /home/runner/work/cards/cards/cards ${CARDS}-copy/boot/cards
+cp -r -n /home/runner/work/cards/cards/boot ${CARDS}-copy/boot
+cp -r -n /home/runner/work/cards/cards/cards ${CARDS}-copy/cards
+cp -r -n /home/runner/work/cards/cards/EFI ${CARDS}-copy/EFI
+cp -r -n /home/runner/work/cards/cards/grub ${CARDS}-copy/grub
+
 cp -r -n /home/runner/work/cards/cards/boot ${CARDS}-copy/../loopfs/boot
 cp -r -n /home/runner/work/cards/cards/cards ${CARDS}-copy/../loopfs/boot/cards
 cp -r -n /home/runner/work/cards/cards/boot ${CARDS}-copy/../loopfs/EFI/boot
 cp -r -n /home/runner/work/cards/cards/cards ${CARDS}-copy/../loopfs/EFI/cards
 cp -r -n /home/runner/work/cards/cards/EFI ${CARDS}-copy/../loopfs/EFI
 cp -r -n /home/runner/work/cards/cards/grub ${CARDS}-copy/../loopfs/grub
+sudo grub-install --root-directory=${CARDS}-copy/../loopfs /dev/loop0 # Install GRUB into loop device
+sudo grub-install --root-directory=${CARDS}-copy/../loopfs ./loopfs # Install GRUB into loop device
+sudo grub-install --root-directory=${CARDS}-copy/ /loopfs # Install GRUB into loop device
 
 # Create final disk image
 cd ${CARDS}-copy/
