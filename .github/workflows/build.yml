@@ -1,55 +1,40 @@
 name: Build Cards
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
-  workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Start Build'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
 jobs:
   Build:
     runs-on: ubuntu-latest
+
+    container:
+      image: archlinux:latest
+      volumes:
+        - /proc:/proc
+      options: --privileged
+
     steps:
-      - uses: actions/checkout@v2
+    - name: Clone build scripts
+      uses: actions/checkout@v1
 
-      - name: Setup build environment, compile OS, bundle disk image
-        run: |
-          sudo apt install build-essential gcc make libncurses5-dev libncursesw5-dev \
-          perl python3 mkisofs libc6-dev libelf-dev libarchive-dev gobjc++ \
-          archivemount gettext autopoint libtool libtool-bin grub-efi gettext -y > /dev/null
+    - name: Build & bundle disk image
+      run: |
+        chmod +x ./build.sh
+        ./build.sh
 
-          export CARDS=~/cards
-          export PACKAGES=~/packages
-          export LINUX_VERSION=5.9-rc7
-          export LINUX_BUILD_VERSION=5.9.0-rc7
-          export BINUTILS_VERSION=2.35
-          export GCC_VERSION=10.2.0
-          export GMP_VERSION=6.2.0
-          export MPFR_VERSION=4.1.0
-          export MPC_VERSION=1.2.0
-          export GLIBC_VERSION=2.32
-          export BUSYBOX_VERSION=1.32.0
-          export CLFS_BOOTSCRIPTS_VERSION=3.0-20140710
-          export PACMAN_VERSION=5.2.2
-          export ZLIB_VERSION=1.2.11
-          export COREUTILS_VERSION=8.32
-          export UTIL_LINUX_VERSION=2.36
+    - name: Upload disk image
+      uses: actions/upload-artifact@v2.1.4
+      with:
+        name: cards
+        path: ~/cards.iso
+        if-no-files-found: error
 
-          chmod +x ./build-packages.sh
-          chmod +x ./build-cards.sh
-          ./build-packages.sh
-          ./build-cards.sh
-
-      - name: Upload disk image
-        uses: actions/upload-artifact@v2.1.4
-        with:
-          name: cards
-          path: ~/cards-copy/cards.iso
-          if-no-files-found: error
+    - name: Upload build profile
+      uses: actions/upload-artifact@v2.1.4
+      with:
+        name: profile
+        path: ~/cards-profile
+        if-no-files-found: error
