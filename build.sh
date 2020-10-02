@@ -17,10 +17,6 @@ xterm
 lightdm
 mesa
 i3-gaps
-switchboard-plug-desktop
-switchboard-plug-locale
-switchboard-plug-security-privacy
-virtualbox-guest-utils
 EOT
 
 echo -e "packages.x86_64:\n---"
