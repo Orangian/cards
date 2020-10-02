@@ -8,15 +8,7 @@ cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
 cp -rf ./cards/. ${PROFILE}
 
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
-xorg
-xorg-drivers
-xorg-server
-xorg-xinit
-xf86-input-libinput
-xterm
-lightdm
-mesa
-i3-gaps
+
 EOT
 
 echo -e "packages.x86_64:\n---"
