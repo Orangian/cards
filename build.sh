@@ -8,9 +8,31 @@ cp -r /usr/share/archiso/configs/baseline/ ${PROFILE}
 cp -rf ./cards/. ${PROFILE}
 
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
+arch-install-scripts
+ethtool
+exfatprogs
+f2fs-tools
+fsarchiver
+gnu-netcat
+sudo
+nano
+nfs-utils
+linux-atm
+linux-firmware
+lsscsi
+reiserfsprogs
+efibootmgr
+dhcpd
+btrfs-progs
+broadcom-wl
+bind-tools
+b43-fwcutter
 util-linux
+xfsprogs
+zsh
+rsync
+
 lightdm
-"mkinitcpio linux"
 mkinitcpio
 mkinitcpio-archiso
 EOT
