@@ -6,7 +6,7 @@ on:
 
 jobs:
   Build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     container:
       image: archlinux:latest
