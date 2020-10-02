@@ -8,6 +8,27 @@ cp -r /usr/share/archiso/configs/baseline/ ${PROFILE}
 cp -rf ./cards/. ${PROFILE}
 
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
+xorg
+xorg-drivers
+xorg-server
+xorg-xinit
+xf86-input-libinput
+xterm
+lightdm
+mesa
+gtk-engine-murrine
+gtkspell3
+qt5-svg
+qt5-wayland
+qt5-translations
+vala
+pantheon
+lightdm-pantheon-greeter
+switchboard-plug-desktop
+switchboard-plug-locale
+switchboard-plug-security-privacy
+gnome-disk-utility
+virtualbox-guest-utils
 amd-ucode
 arch-install-scripts
 b43-fwcutter
