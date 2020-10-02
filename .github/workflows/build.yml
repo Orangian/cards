@@ -22,12 +22,11 @@ jobs:
       run: |
         chmod +x ./build.sh
         ./build.sh
-
     - name: Upload disk image
       uses: actions/upload-artifact@v2.1.4
       with:
         name: cards
-        path: ~/cards.iso
+        path: ~/cards-*.*.*-x86_64.iso
         if-no-files-found: error
 
     - name: Upload build profile
