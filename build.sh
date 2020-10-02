@@ -8,7 +8,8 @@ cp -r /usr/share/archiso/configs/baseline/ ${PROFILE}
 cp -rf ./cards/. ${PROFILE}
 
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
-
+util-linux
+lightdm
 EOT
 
 echo -e "packages.x86_64:\n---"
