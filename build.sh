@@ -79,7 +79,7 @@ usb_modeswitch
 usbutils
 xfsprogs
 xl2tpd
-zsh
+bash
 EOT
 
 echo -e "packages.x86_64:\n---"
