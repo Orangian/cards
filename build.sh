@@ -10,6 +10,9 @@ cp -rf ./cards/. ${PROFILE}
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
 util-linux
 lightdm
+"mkinitcpio linux"
+mkinitcpio
+mkinitcpio-archiso
 EOT
 
 echo -e "packages.x86_64:\n---"
@@ -21,10 +24,6 @@ ln -s /lib/systemd/system/lightdm.service ${PROFILE}/airootfs/etc/systemd/system
 
 mkdir ./out
 mkdir /tmp/archiso-tmp
-make_basefs() {
-mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
-mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "mkinitcpio linux" install
-}
 mkarchiso -v -w /tmp/archiso-tmp ${PROFILE}
 rm -rf /tmp/archiso-tmp
 mv ./out/cards-*.*.*-x86_64.iso ~
