@@ -4,7 +4,8 @@ set +h
 umask 0022 # Correct file permissions
 
 pacman -Syu archiso --noconfirm
-cp -r /usr/share/archiso/configs/baseline/ ${PROFILE}
+cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
+rm ${PROFILE}/packages.x86_64
 cp -rf ./cards/. ${PROFILE}
 
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
