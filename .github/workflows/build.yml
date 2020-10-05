@@ -3,6 +3,8 @@ name: Build Cards
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   Build:
@@ -12,6 +14,8 @@ jobs:
       image: archlinux:latest
       volumes:
         - /proc:/proc
+        - /sys/fs/cgroup/systemd/actions_job:/sys/fs/cgroup/systemd/actions_job
+        - /sys/fs/cgroup:/sys/fs/cgroup
       options: --privileged
 
     steps:
@@ -34,4 +38,11 @@ jobs:
       with:
         name: profile
         path: ~/cards-profile
+        if-no-files-found: error
+
+    - name: Upload local repository
+      uses: actions/upload-artifact@v2.1.4
+      with:
+        name: local_repo
+        path: ~/local-repo
         if-no-files-found: error
