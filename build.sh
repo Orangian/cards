@@ -7,7 +7,8 @@ umask 0022 # Correct file permissions
 systemd-machine-id-setup # Prevents errors when building AUR packages
 
 pacman -Syu archiso git base-devel jq expac diffstat pacutils wget devtools libxslt cmake \
-intltool polkit dbus-glib light-locker --noconfirm --noprogressbar # Install packages we'll need to build
+intltool gtk-doc gobject-introspection gnome-common polkit dbus-glib gtk3 glade meson vala \
+xorg-server-xvfb light-locker ufw --noconfirm --noprogressbar # Install packages we'll need to build
 
 # Allow us to use a standard user account w/ password-less sudo privilege (for building AUR packages later)
 tee -a /etc/sudoers > /dev/null <<EOT
@@ -23,7 +24,6 @@ cd ../
 
 # Begin setting up our profile
 cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
-rm ${PROFILE}/packages.x86_64   
 cp -rf ./cards/. ${PROFILE}
 mkdir ${LOCAL_REPO}
 repo-add ${LOCAL_REPO}/custom.db.tar.xz
@@ -34,6 +34,7 @@ sed -i -e "s?~/local-repo?${LOCAL_REPO}?" ${PROFILE}/pacman.conf
 cp -f ${PROFILE}/pacman.conf /etc
 mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
 #pacman -Rdd granite # We need 'granite-git' (AUR) instead of 'granite' (Community)
+pacman -Rdd gsettings-desktop-schemas
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview ttf-raleway"
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview gnome-settings-daemon-elementary"
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview elementary-wallpapers-git"
@@ -44,93 +45,18 @@ mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-system-monitor-git"
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-mail-git"
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview elementary-planner-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview libhandy1"
+#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview ttf-raleway elementary-wallpapers-git \
+#gnome-doc-utils libhandy1 pantheon-default-settings pantheon-session-git switchboard-plug-elementary-tweaks-git pantheon-screencast \
+#pantheon-system-monitor-git elementary-planner-git"
+su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-dpms-helper-git pantheon-git-meta \
+pantheon-screencast pantheon-system-monitor-git elementary-planner-git ttf-raleway"
+
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
 echo "---"
 
 # Add packages from Arch's repositories to our profile
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
-## Purged RELENG
-amd-ucode
-arch-install-scripts
-b43-fwcutter
-base
-bind-tools
-broadcom-wl
-btrfs-progs
-ddrescue
-dhclient
-dhcpcd
-diffutils
-dmraid
-dnsmasq
-dosfstools
-edk2-shell
-efibootmgr
-ethtool
-exfatprogs
-f2fs-tools
-fsarchiver
-gnu-netcat
-gpm
-gptfdisk
-grml-zsh-config
-haveged
-hdparm
-intel-ucode
-ipw2100-fw
-ipw2200-fw
-irssi
-iwd
-jfsutils
-linux
-linux-atm
-linux-firmware
-lsscsi
-lvm2
-lynx
-man-db
-man-pages
-mc
-mdadm
-memtest86+
-mkinitcpio
-mkinitcpio-archiso
-mkinitcpio-nfs-utils
-mtools
-nano
-nbd
-ndisc6
-nfs-utils
-nilfs-utils
-ntfs-3g
-nvme-cli
-openconnect
-openssh
-partclone
-parted
-partimage
-reflector
-reiserfsprogs
-rsync
-rxvt-unicode-terminfo
-sdparm
-sg3_utils
-smartmontools
-sudo
-syslinux
-systemd-resolvconf
-tcpdump
-testdisk
-usb_modeswitch
-usbutils
-wireless-regdb
-wireless_tools
-wpa_supplicant
-wvdial
-xfsprogs
-zsh
 ## X11 and drivers
 xorg
 xorg-server
@@ -158,24 +84,131 @@ wlc
 
 ## Display & Misc. Desktop Environment
 lightdm
-alacritty
-i3-gaps
+nvidia-dkms
+vulkan-radeon
+qt5-svg
+qt5-translations
+gnome-disk-utility
+
+## Pantheon
+capnet-assist
+#contractor
 cups
 cups-pk-helper
+#elementary-icon-theme
+#elementary-wallpapers
+epiphany
+file-roller
+#gala
+#gnu-free-fonts
+#gtk-engine-murrine
+#gtk-theme-elementary
+gtkspell3
 gvfs
 gvfs-afc
 gvfs-mtp
 gvfs-nfs
 gvfs-smb
+light-locker
+lightdm-gtk-greeter
+i3-gaps
+#lightdm-pantheon-greeter
+#pantheon
+#pantheon-applications-menu
+#pantheon-calculator
+#pantheon-calendar
+#pantheon-camera
+#pantheon-code
+#pantheon-dpms-helper
+#pantheon-files
+#pantheon-geoclue2-agent
+#pantheon-music
+#pantheon-photos
+#pantheon-polkit-agent
+#pantheon-print
+#pantheon-screenshot
+#pantheon-shortcut-overlay
+#pantheon-terminal
+#pantheon-videos
+#plank
+pulseaudio-bluetooth
 simple-scan
+#switchboard
+#switchboard-plug-desktop
+#switchboard-plug-locale
+#switchboard-plug-security-privacy
 ttf-dejavu
 ttf-droid
 ttf-liberation
 ttf-opensans
+vala
+#wingpanel
+#wingpanel-indicator-datetime
+#wingpanel-indicator-power
+#wingpanel-indicator-session
 
 ## VirtualBox
 virtualbox-guest-utils
+
 ## AUR
+#ttf-raleway
+##gnome-settings-daemon-elementary
+#elementary-wallpapers-git
+#pantheon-default-settings
+#pantheon-session-git
+#switchboard-plug-elementary-tweaks-git
+#pantheon-screencast
+#pantheon-system-monitor-git
+##pantheon-mail-git # AUR package depends on "libhandy-1", not "libhandy1", which exists
+#elementary-planner-git
+contractor-git
+elementary-icon-theme-git
+elementary-wallpapers-git
+gala-git
+granite-git
+gtk-theme-elementary-git
+lightdm-pantheon-greeter-git
+pantheon-applications-menu-git
+pantheon-calculator-git
+pantheon-calendar-git
+pantheon-code-git
+pantheon-default-settings-git
+pantheon-dpms-helper-git
+pantheon-files-git
+pantheon-music-git
+pantheon-screenshot-git
+pantheon-session-git
+pantheon-videos-git
+switchboard-git
+switchboard-plug-a11y-git
+switchboard-plug-about-git
+switchboard-plug-applications-git
+switchboard-plug-datetime-git
+switchboard-plug-desktop-git
+switchboard-plug-display-git
+switchboard-plug-keyboard-git
+switchboard-plug-locale-git
+switchboard-plug-mouse-touchpad-git
+switchboard-plug-network-git
+switchboard-plug-notifications-git
+switchboard-plug-parental-controls-git
+switchboard-plug-power-git
+switchboard-plug-printers-git
+switchboard-plug-security-privacy-git
+switchboard-plug-sharing-git
+switchboard-plug-user-accounts-git
+wingpanel-indicator-bluetooth-git
+wingpanel-indicator-datetime-git
+wingpanel-indicator-network-git
+wingpanel-indicator-nightlight-git
+wingpanel-indicator-notifications-git
+wingpanel-indicator-power-git
+wingpanel-indicator-session-git
+wingpanel-indicator-sound-git
+pantheon-screencast
+pantheon-system-monitor-git
+elementary-planner-git
+ttf-raleway
 EOT
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
