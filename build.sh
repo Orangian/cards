@@ -164,6 +164,13 @@ ttf-liberation
 ttf-opensans
 alacritty
 i3-gaps
+## Wayland
+wayland
+wayland-protocols
+glfw-wayland
+qt5-wayland
+xorg-server-xwayland
+wlc
 ## VirtualBox
 virtualbox-guest-utils
 ## AUR
