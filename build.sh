@@ -167,7 +167,6 @@ gvfs-afc
 gvfs-mtp
 gvfs-nfs
 gvfs-smb
-simple-scan
 ttf-dejavu
 ttf-droid
 ttf-liberation
