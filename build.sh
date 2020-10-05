@@ -23,6 +23,7 @@ cd ../
 
 # Begin setting up our profile
 cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
+rm ${PROFILE}/packages.x86_64
 cp -rf ./cards/. ${PROFILE}
 mkdir ${LOCAL_REPO}
 repo-add ${LOCAL_REPO}/custom.db.tar.xz
@@ -50,6 +51,86 @@ echo "---"
 
 # Add packages from Arch's repositories to our profile
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
+## Purged RELENG
+amd-ucode
+arch-install-scripts
+b43-fwcutter
+base
+bind-tools
+broadcom-wl
+btrfs-progs
+ddrescue
+dhclient
+dhcpcd
+diffutils
+dmraid
+dnsmasq
+dosfstools
+edk2-shell
+efibootmgr
+ethtool
+exfatprogs
+f2fs-tools
+fsarchiver
+gnu-netcat
+gpm
+gptfdisk
+grml-zsh-config
+haveged
+hdparm
+intel-ucode
+ipw2100-fw
+ipw2200-fw
+irssi
+iwd
+jfsutils
+linux
+linux-atm
+linux-firmware
+lsscsi
+lvm2
+lynx
+man-db
+man-pages
+mc
+mdadm
+memtest86+
+mkinitcpio
+mkinitcpio-archiso
+mkinitcpio-nfs-utils
+mtools
+nano
+nbd
+ndisc6
+nfs-utils
+nilfs-utils
+ntfs-3g
+nvme-cli
+openconnect
+openssh
+partclone
+parted
+partimage
+reflector
+reiserfsprogs
+rsync
+rxvt-unicode-terminfo
+sdparm
+sg3_utils
+smartmontools
+sudo
+syslinux
+systemd-resolvconf
+tcpdump
+testdisk
+usb_modeswitch
+usbutils
+wireless-regdb
+wireless_tools
+wpa_supplicant
+wvdial
+xfsprogs
+zsh
 ## X11 and drivers
 xorg
 xorg-server
