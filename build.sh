@@ -7,7 +7,7 @@ umask 0022 # Correct file permissions
 systemd-machine-id-setup # Prevents errors when building AUR packages
 
 pacman -Syu archiso git base-devel jq expac diffstat pacutils wget devtools libxslt cmake \
-intltool polkit dbus-glib --noconfirm --noprogressbar # Install packages we'll need to build
+intltool polkit dbus-glib light-locker --noconfirm --noprogressbar # Install packages we'll need to build
 
 # Allow us to use a standard user account w/ password-less sudo privilege (for building AUR packages later)
 tee -a /etc/sudoers > /dev/null <<EOT
@@ -23,7 +23,7 @@ cd ../
 
 # Begin setting up our profile
 cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
-rm ${PROFILE}/packages.x86_64
+rm ${PROFILE}/packages.x86_64   
 cp -rf ./cards/. ${PROFILE}
 mkdir ${LOCAL_REPO}
 repo-add ${LOCAL_REPO}/custom.db.tar.xz
@@ -44,7 +44,7 @@ mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-system-monitor-git"
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-mail-git"
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview elementary-planner-git"
-su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview libhandy1"
+#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview libhandy1"
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
 echo "---"
@@ -147,23 +147,7 @@ libva
 libva-mesa-driver
 intel-ucode
 intel-tbb
-## Display & Misc. Desktop Environment
-cups
-cups-pk-helper
-gvfs
-gvfs-afc
-gvfs-mtp
-gvfs-nfs
-gvfs-smb
-light-locker
-lightdm
-simple-scan
-ttf-dejavu
-ttf-droid
-ttf-liberation
-ttf-opensans
-alacritty
-i3-gaps
+
 ## Wayland
 wayland
 wayland-protocols
@@ -171,6 +155,24 @@ glfw-wayland
 qt5-wayland
 xorg-server-xwayland
 wlc
+
+## Display & Misc. Desktop Environment
+lightdm
+alacritty
+i3-gaps
+cups
+cups-pk-helper
+gvfs
+gvfs-afc
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+simple-scan
+ttf-dejavu
+ttf-droid
+ttf-liberation
+ttf-opensans
+
 ## VirtualBox
 virtualbox-guest-utils
 ## AUR
