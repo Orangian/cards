@@ -199,7 +199,6 @@ ls ${LOCAL_REPO}
 echo "---"
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
-rm ${PROFILE}/airootfs/usr/share/xsessions/i3.desktop
 # Enable our daemons
 ln -s /lib/systemd/system/lightdm.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
 ln -s /lib/systemd/system/NetworkManager.service ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
