@@ -7,7 +7,7 @@ umask 0022 # Correct file permissions
 systemd-machine-id-setup # Prevents errors when building AUR packages
 
 pacman -Syu archiso git base-devel jq expac diffstat pacutils wget devtools libxslt cmake \
-intltool polkit dbus-glib light-locker go --noconfirm --noprogressbar # Install packages we'll need to build
+intltool polkit dbus-glib light-locker --noconfirm --noprogressbar # Install packages we'll need to build
 
 # Allow us to use a standard user account w/ password-less sudo privilege (for building AUR packages later)
 tee -a /etc/sudoers > /dev/null <<EOT
@@ -109,7 +109,6 @@ wpa_supplicant
 wvdial
 xfsprogs
 zsh
-go
 ## X11 and drivers
 xorg
 xorg-server
@@ -134,7 +133,6 @@ xorg-server-xwayland
 wlc
 
 ## Display & Misc. Desktop Environment
-lightdm
 alacritty
 i3-gaps
 cups
@@ -156,7 +154,7 @@ cp -f ${PROFILE}/pacman.conf /etc
 mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
 yay \
-lightdm-mini-greeter"
+ly"
 
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
@@ -169,7 +167,7 @@ mkdir -p ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/systemd/system/bluetooth.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/modules-load.d
-ln -s /lib/systemd/system/lightdm.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
+ln -s /lib/systemd/system/ly.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
 ln -s /lib/systemd/system/NetworkManager.service ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
 ln -s /lib/systemd/system/cups.socket ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 ln -s /lib/systemd/system/avahi-daemon.socket ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
