@@ -143,6 +143,7 @@ gvfs-mtp
 gvfs-nfs
 gvfs-smb
 alacritty
+acpid
 
 ## VirtualBox
 #virtualbox-guest-utils
