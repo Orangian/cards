@@ -23,7 +23,6 @@ cd ../
 
 # Begin setting up our profile
 cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
-rm ${PROFILE}/packages.x86_64   
 cp -rf ./cards/. ${PROFILE}
 mkdir ${LOCAL_REPO}
 repo-add ${LOCAL_REPO}/custom.db.tar.xz
@@ -33,19 +32,9 @@ sed -i -e "s?~/local-repo?${LOCAL_REPO}?" ${PROFILE}/pacman.conf
 # Add packages to our local repository (shared between host and profile)
 cp -f ${PROFILE}/pacman.conf /etc
 mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
-#pacman -Rdd granite # We need 'granite-git' (AUR) instead of 'granite' (Community)
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview ttf-raleway"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview gnome-settings-daemon-elementary"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview elementary-wallpapers-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-default-settings"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-session-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview switchboard-plug-elementary-tweaks-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-screencast"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-system-monitor-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-mail-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview elementary-planner-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview libhandy1"
-su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview lightdm-mini-greeter"
+su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
+yay"
+
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
 echo "---"
@@ -176,35 +165,24 @@ ttf-opensans
 ## VirtualBox
 virtualbox-guest-utils
 ## AUR
+lightdm-mini-greeter
+yay
 EOT
 
-# Add packages to our local repository (shared between host and profile)
-cp -f ${PROFILE}/pacman.conf /etc
-mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
-#pacman -Rdd granite # We need 'granite-git' (AUR) instead of 'granite' (Community)
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview ttf-raleway"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview gnome-settings-daemon-elementary"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview elementary-wallpapers-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-default-settings"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-session-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview switchboard-plug-elementary-tweaks-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-screencast"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-system-monitor-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-mail-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview elementary-planner-git"
-#su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview libhandy1"
-su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview lightdm-mini-greeter"
-echo -e "LOCAL_REPO:\n---"
-ls ${LOCAL_REPO}
-echo "---"
-
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
+
 # Enable our daemons
+mkdir -p ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
+mkdir -p ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
+mkdir -p ${PROFILE}/airootfs/etc/systemd/system/bluetooth.target.wants
+mkdir -p ${PROFILE}/airootfs/etc/modules-load.d
 ln -s /lib/systemd/system/lightdm.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
 ln -s /lib/systemd/system/NetworkManager.service ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
 ln -s /lib/systemd/system/cups.socket ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 ln -s /lib/systemd/system/avahi-daemon.socket ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 ln -s /lib/systemd/system/bluetooth.service ${PROFILE}/airootfs/etc/systemd/system/bluetooth.target.wants
+#ln -s /lib/modules-load.d/virtualbox-guest-dkms.conf ${PROFILE}/airootfs/etc/modules-load.d
+
 
 # Build & bundle the disk image
 mkdir ./out
