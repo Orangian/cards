@@ -30,17 +30,6 @@ chmod -R 777 ${LOCAL_REPO}
 sed -i -e "s?~/local-repo?${LOCAL_REPO}?" ${PROFILE}/pacman.conf
 rm ${PROFILE}/packages.x86_64
 
-# Add packages to our local repository (shared between host and profile)
-cp -f ${PROFILE}/pacman.conf /etc
-mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
-su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
-yay \
-lightdm-mini-greeter"
-
-echo -e "LOCAL_REPO:\n---"
-ls ${LOCAL_REPO}
-echo "---"
-
 # Add packages from Arch's repositories to our profile
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
 ## Purged RELENG
@@ -161,6 +150,17 @@ alacritty
 #virtualbox-guest-utils
 ## AUR
 EOT
+
+# Add packages to our local repository (shared between host and profile)
+cp -f ${PROFILE}/pacman.conf /etc
+mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
+su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
+yay \
+lightdm-mini-greeter"
+
+echo -e "LOCAL_REPO:\n---"
+ls ${LOCAL_REPO}
+echo "---"
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
 
