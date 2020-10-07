@@ -33,7 +33,8 @@ sed -i -e "s?~/local-repo?${LOCAL_REPO}?" ${PROFILE}/pacman.conf
 cp -f ${PROFILE}/pacman.conf /etc
 mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
-yay"
+yay
+lightdm-mini-greeter"
 
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
@@ -79,9 +80,6 @@ linux-atm
 linux-firmware
 lsscsi
 lvm2
-lynx
-man-db
-man-pages
 mc
 mdadm
 memtest86+
@@ -131,8 +129,6 @@ xorg-twm
 xterm
 xf86-input-libinput
 mesa
-noto-fonts
-ttf-hack
 libva
 libva-mesa-driver
 intel-ucode
@@ -157,16 +153,11 @@ gvfs-afc
 gvfs-mtp
 gvfs-nfs
 gvfs-smb
-ttf-dejavu
-ttf-droid
-ttf-liberation
-ttf-opensans
+alacritty
 
 ## VirtualBox
-virtualbox-guest-utils
+#virtualbox-guest-utils
 ## AUR
-lightdm-mini-greeter
-yay
 EOT
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
