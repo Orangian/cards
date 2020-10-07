@@ -21,6 +21,17 @@ cd aurutils
 su -s /bin/sh nobody -c "makepkg -si --noconfirm --noprogressbar" # Make aurutils as a regular user
 cd ../
 
+# Add packages to our local repository (shared between host and profile)
+cp -f ${PROFILE}/pacman.conf /etc
+mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
+su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
+yay \
+ly"
+
+echo -e "LOCAL_REPO:\n---"
+ls ${LOCAL_REPO}
+echo "---"
+
 # Begin setting up our profile
 cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
 cp -rf ./cards/. ${PROFILE}
@@ -149,17 +160,6 @@ acpid
 #virtualbox-guest-utils
 ## AUR
 EOT
-
-# Add packages to our local repository (shared between host and profile)
-cp -f ${PROFILE}/pacman.conf /etc
-mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
-su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
-yay \
-ly"
-
-echo -e "LOCAL_REPO:\n---"
-ls ${LOCAL_REPO}
-echo "---"
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
 
