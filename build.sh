@@ -160,6 +160,7 @@ wlc
 lightdm
 alacritty
 i3-gaps
+lightdm-mini-greeter
 cups
 cups-pk-helper
 gvfs
