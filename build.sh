@@ -45,6 +45,7 @@ mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview pantheon-mail-git"
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview elementary-planner-git"
 #su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview libhandy1"
+su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview lightdm-mini-greeter"
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
 echo "---"
@@ -160,7 +161,6 @@ wlc
 lightdm
 alacritty
 i3-gaps
-lightdm-mini-greeter
 cups
 cups-pk-helper
 gvfs
