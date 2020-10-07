@@ -7,7 +7,7 @@ umask 0022 # Correct file permissions
 systemd-machine-id-setup # Prevents errors when building AUR packages
 
 pacman -Syu archiso git base-devel jq expac diffstat pacutils wget devtools libxslt cmake \
-intltool polkit dbus-glib light-locker --noconfirm --noprogressbar # Install packages we'll need to build
+intltool polkit dbus-glib light-locker go --noconfirm --noprogressbar # Install packages we'll need to build
 
 # Allow us to use a standard user account w/ password-less sudo privilege (for building AUR packages later)
 tee -a /etc/sudoers > /dev/null <<EOT
