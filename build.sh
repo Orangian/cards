@@ -150,6 +150,9 @@ virtualbox-guest-utils
 #elementary-planner-git
 #clipped-git
 #ideogram-git
+ly
+yay
+i3lock-blur
 EOT
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
