@@ -34,7 +34,6 @@ cp -f ${PROFILE}/pacman.conf /etc
 mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
 #pacman -Rdd gsettings-desktop-schemas
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
-i3lock-blur \
 ly \
 yay"
 
@@ -87,6 +86,7 @@ cairo
 libglvnd
 libev
 libx11
+i3lock-color
 libxkbcommon>=0.5.0
 libxkbcommon-x11>=0.5.0
 
