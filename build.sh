@@ -1,6 +1,6 @@
 #!/bin/bash
 export HOME=~
-export PROFILE=${HOME}/runner/cards
+export PROFILE=${HOME}/runner/cards-profile
 export LOCAL_REPO=${HOME}/local-repo
 set +h
 umask 0022 # Correct file permissions
