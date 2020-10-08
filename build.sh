@@ -23,6 +23,15 @@ cd aurutils
 su -s /bin/sh nobody -c "makepkg -si --noconfirm --noprogressbar" # Make aurutils as a regular user
 cd ../
 
+# Begin setting up our profile
+cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
+cp -rf ./cards/. ${PROFILE}
+mkdir ${LOCAL_REPO}
+repo-add ${LOCAL_REPO}/custom.db.tar.xz
+chmod -R 777 ${LOCAL_REPO}
+sed -i -e "s?~/local-repo?${LOCAL_REPO}?" ${PROFILE}/pacman.conf
+rm ${PROFILE}/packages.x86_64
+
 # Add packages to our local repository (shared between host and profile)
 cp -f ${PROFILE}/pacman.conf /etc
 mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
@@ -34,15 +43,6 @@ i3lock-blur"
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
 echo "---"
-
-# Begin setting up our profile
-cp -r /usr/share/archiso/configs/releng/ ${PROFILE}
-cp -rf ./cards/. ${PROFILE}
-mkdir ${LOCAL_REPO}
-repo-add ${LOCAL_REPO}/custom.db.tar.xz
-chmod -R 777 ${LOCAL_REPO}
-sed -i -e "s?~/local-repo?${LOCAL_REPO}?" ${PROFILE}/pacman.conf
-rm ${PROFILE}/packages.x86_64
 
 # Add packages from Arch's repositories to our profile
 tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
