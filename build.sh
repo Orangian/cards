@@ -42,129 +42,9 @@ ls ${LOCAL_REPO}
 echo "---"
 
 # Add packages from Arch's repositories to our profile
-tee -a ${PROFILE}/packages.x86_64 > /dev/null <<EOT
-## X11 and drivers
-xorg
-xorg-server
-xorg-drivers
-xorg-xinit
-xorg-xclock
-xorg-twm
-xterm
-xf86-input-libinput
-mesa
-noto-fonts
-ttf-hack
-libva
-libva-mesa-driver
-intel-ucode
-intel-tbb
-
-## Wayland
-wayland
-wayland-protocols
-glfw-wayland
-qt5-wayland
-xorg-server-xwayland
-wlc
-
-## Display & Utilities
-#lightdm
-nvidia-dkms
-vulkan-radeon
-qt5-svg
-qt5-translations
-#gnome-disk-utility
-alacritty
-go
-pkg-config
-pkg-config
-libxcb
-xcb-util
-pam
-cairo
-libglvnd
-libev
-libx11
-i3lock-color
-libxkbcommon>=0.5.0
-libxkbcommon-x11>=0.5.0
-
-## Pantheon
-#capnet-assist
-#contractor
-cups
-#cups-pk-helper
-#elementary-icon-theme
-#elementary-wallpapers
-#epiphany
-#file-roller
-#gala
-#gnu-free-fonts
-#gtk-engine-murrine
-#gtk-theme-elementary
-#gtkspell3
-#gvfs
-#gvfs-afc
-#gvfs-mtp
-#gvfs-nfs
-#gvfs-smb
-#light-locker
-#lightdm-gtk-greeter
-#lightdm-pantheon-greeter
-#pantheon
-#pantheon-applications-menu
-#pantheon-calculator
-#pantheon-calendar
-#pantheon-camera
-#pantheon-code
-#pantheon-dpms-helper
-#pantheon-files
-#pantheon-geoclue2-agent
-#pantheon-music
-#pantheon-photos
-#pantheon-polkit-agent
-#pantheon-print
-#pantheon-screenshot
-#pantheon-shortcut-overlay
-#pantheon-terminal
-#pantheon-videos
-#plank
-pulseaudio-bluetooth
-#simple-scan
-#switchboard
-#switchboard-plug-desktop
-#switchboard-plug-locale
-#switchboard-plug-security-privacy
-#ttf-dejavu
-#ttf-droid
-#ttf-liberation
-#ttf-opensans
-#vala
-#wingpanel
-#wingpanel-indicator-datetime
-#wingpanel-indicator-power
-#wingpanel-indicator-session
-
-## VirtualBox
-virtualbox-guest-utils
-
-## AUR
-#ttf-raleway
-#gnome-settings-daemon-elementary
-#elementary-wallpapers-git
-#pantheon-default-settings
-#pantheon-session-git
-#switchboard-plug-elementary-tweaks-git
-#pantheon-screencast
-#pantheon-system-monitor-git
-#pantheon-mail-git # AUR package depends on "libhandy-1", not "libhandy1", which exists
-#elementary-planner-git
-#clipped-git
-#ideogram-git
-ly
-yay
-EOT
+cat ${HOME}/purged-releng.list >> ${PROFILE}/packages.x86_64
+# Add custom packages to our profile
+cat ${HOME}/user-packages.list >> ${PROFILE}/packages.x86_64
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
 
@@ -173,15 +53,14 @@ mkdir -p ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/systemd/system/bluetooth.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/modules-load.d
+
 #ln -s /lib/systemd/system/lightdm.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
-#ln -s /lib/systemd/system/ly.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
+ln -s /lib/systemd/system/ly.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
 ln -s /lib/systemd/system/NetworkManager.service ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
 ln -s /lib/systemd/system/cups.socket ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 ln -s /lib/systemd/system/avahi-daemon.socket ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 ln -s /lib/systemd/system/bluetooth.service ${PROFILE}/airootfs/etc/systemd/system/bluetooth.target.wants
 #ln -s /lib/modules-load.d/virtualbox-guest-dkms.conf ${PROFILE}/airootfs/etc/modules-load.d
-
-ln -s /usr/share/backgrounds/elementaryos-default '${PROFILE}/airootfs/usr/share/backgrounds/Sunset by the Pier.jpg' # Set default desktop background
 
 # Build & bundle the disk image
 mkdir ./out
