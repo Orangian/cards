@@ -1,6 +1,6 @@
 #!/bin/bash
 export HOME=~
-export PROFILE=${HOME}/cards-profile
+export PROFILE=${HOME}/runner/cards
 export LOCAL_REPO=${HOME}/local-repo
 set +h
 umask 0022 # Correct file permissions
@@ -28,6 +28,8 @@ su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --
 yay \
 ly \
 i3lock-blur"
+
+
 
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
