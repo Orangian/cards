@@ -1,10 +1,12 @@
 #!/bin/bash
 export HOME=~
-export PROFILE=${HOME}/runner/cards-profile
+export PROFILE=${HOME}/cards-profile
 export LOCAL_REPO=${HOME}/local-repo
 set +h
 umask 0022 # Correct file permissions
 systemd-machine-id-setup # Prevents errors when building AUR packages
+mkdir ${LOCAL_REPO}
+mkdir ${PROFILE}
 
 pacman -Syu archiso git base-devel jq expac diffstat pacutils wget devtools libxslt cmake \
 intltool polkit dbus-glib go --noconfirm --noprogressbar # Install packages we'll need to build
@@ -28,8 +30,6 @@ su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --
 yay \
 ly \
 i3lock-blur"
-
-
 
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
