@@ -34,21 +34,23 @@ cp -f ${PROFILE}/pacman.conf /etc
 mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
 pacman -Rdd gsettings-desktop-schemas
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
-ttf-raleway \
-elementary-wallpapers-git \
-gnome-doc-utils \
-libhandy1 \
-pantheon-default-settings \
-pantheon-session-git \
-switchboard-plug-elementary-tweaks-git \
-pantheon-screencast \
-pantheon-system-monitor-git \
-elementary-planner-git \
-clipped-git \
-gamehub-git \
-ideogram-git \
-agenda-git \
-pantheon-dock-git \
+#ttf-raleway \
+#elementary-wallpapers-git \
+#gnome-doc-utils \
+#libhandy1 \
+#pantheon-default-settings \
+#pantheon-session-git \
+#switchboard-plug-elementary-tweaks-git \
+#pantheon-screencast \
+#pantheon-system-monitor-git \
+#elementary-planner-git \
+#clipped-git \
+#gamehub-git \
+#ideogram-git \
+#agenda-git \
+#pantheon-dock-git \
+i3lock-blur \
+ly
 yay"
 
 echo -e "LOCAL_REPO:\n---"
@@ -83,86 +85,89 @@ xorg-server-xwayland
 wlc
 
 ## Display & Utilities
-lightdm
+#lightdm
 nvidia-dkms
 vulkan-radeon
 qt5-svg
 qt5-translations
-gnome-disk-utility
+#gnome-disk-utility
+alacritty
 
 ## Pantheon
-capnet-assist
-contractor
+#capnet-assist
+#contractor
 cups
-cups-pk-helper
-elementary-icon-theme
-elementary-wallpapers
-epiphany
-file-roller
-gala
-gnu-free-fonts
-gtk-engine-murrine
-gtk-theme-elementary
-gtkspell3
-gvfs
-gvfs-afc
-gvfs-mtp
-gvfs-nfs
-gvfs-smb
-light-locker
-lightdm-gtk-greeter
-lightdm-pantheon-greeter
-pantheon
-pantheon-applications-menu
-pantheon-calculator
-pantheon-calendar
-pantheon-camera
-pantheon-code
-pantheon-dpms-helper
-pantheon-files
-pantheon-geoclue2-agent
-pantheon-music
-pantheon-photos
-pantheon-polkit-agent
-pantheon-print
-pantheon-screenshot
-pantheon-shortcut-overlay
-pantheon-terminal
-pantheon-videos
-plank
+#cups-pk-helper
+#elementary-icon-theme
+#elementary-wallpapers
+#epiphany
+#file-roller
+#gala
+#gnu-free-fonts
+#gtk-engine-murrine
+#gtk-theme-elementary
+#gtkspell3
+#gvfs
+#gvfs-afc
+#gvfs-mtp
+#gvfs-nfs
+#gvfs-smb
+#light-locker
+#lightdm-gtk-greeter
+#lightdm-pantheon-greeter
+#pantheon
+#pantheon-applications-menu
+#pantheon-calculator
+#pantheon-calendar
+#pantheon-camera
+#pantheon-code
+#pantheon-dpms-helper
+#pantheon-files
+#pantheon-geoclue2-agent
+#pantheon-music
+#pantheon-photos
+#pantheon-polkit-agent
+#pantheon-print
+#pantheon-screenshot
+#pantheon-shortcut-overlay
+#pantheon-terminal
+#pantheon-videos
+#plank
 pulseaudio-bluetooth
-simple-scan
-switchboard
-switchboard-plug-desktop
-switchboard-plug-locale
-switchboard-plug-security-privacy
-ttf-dejavu
-ttf-droid
-ttf-liberation
-ttf-opensans
-vala
-wingpanel
-wingpanel-indicator-datetime
-wingpanel-indicator-power
-wingpanel-indicator-session
+#simple-scan
+#switchboard
+#switchboard-plug-desktop
+#switchboard-plug-locale
+#switchboard-plug-security-privacy
+#ttf-dejavu
+#ttf-droid
+#ttf-liberation
+#ttf-opensans
+#vala
+#wingpanel
+#wingpanel-indicator-datetime
+#wingpanel-indicator-power
+#wingpanel-indicator-session
 
 ## VirtualBox
 virtualbox-guest-utils
 
 ## AUR
-ttf-raleway
+#ttf-raleway
 #gnome-settings-daemon-elementary
-elementary-wallpapers-git
-pantheon-default-settings
-pantheon-session-git
-switchboard-plug-elementary-tweaks-git
-pantheon-screencast
-pantheon-system-monitor-git
+#elementary-wallpapers-git
+#pantheon-default-settings
+#pantheon-session-git
+#switchboard-plug-elementary-tweaks-git
+#pantheon-screencast
+#pantheon-system-monitor-git
 #pantheon-mail-git # AUR package depends on "libhandy-1", not "libhandy1", which exists
-elementary-planner-git
+#elementary-planner-git
 #clipped-git
 #ideogram-git
 yay
+ly
+i3lock-blur
 EOT
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
@@ -172,7 +177,8 @@ mkdir -p ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/systemd/system/bluetooth.target.wants
 mkdir -p ${PROFILE}/airootfs/etc/modules-load.d
-ln -s /lib/systemd/system/lightdm.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
+#ln -s /lib/systemd/system/lightdm.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
+#ln -s /lib/systemd/system/ly.service ${PROFILE}/airootfs/etc/systemd/system/display-manager.service
 ln -s /lib/systemd/system/NetworkManager.service ${PROFILE}/airootfs/etc/systemd/system/multi-user.target.wants
 ln -s /lib/systemd/system/cups.socket ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
 ln -s /lib/systemd/system/avahi-daemon.socket ${PROFILE}/airootfs/etc/systemd/system/sockets.target.wants
