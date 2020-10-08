@@ -77,6 +77,7 @@ qt5-svg
 qt5-translations
 #gnome-disk-utility
 alacritty
+go
 
 ## Pantheon
 #capnet-assist
