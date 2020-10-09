@@ -27,6 +27,26 @@ jobs:
     steps:
     - name: Clone build scripts
       uses: actions/checkout@v1
+      
+    - name: Setup Build Environment
+      run: |
+        chmod +x ./setup.sh
+        ./setup.sh
+        
+    - name: AUR Packages
+      run: |
+        chmod +x ./aur.sh
+        ./aur.sh
+        
+    - name: Normal Packages
+      run: |
+        chmod +x ./nor.sh
+        ./nor.sh       
+        
+    - name: Daemons and services
+      run: |
+        chmod +x ./dae.sh
+        ./dae.sh       
 
     - name: Build & bundle disk image
       run: |
