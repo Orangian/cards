@@ -37,6 +37,7 @@ pkg-config
 libxcb
 xcb-util
 pam
+archlinux-keyring
 cairo
 libglvnd
 libev
