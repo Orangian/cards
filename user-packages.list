@@ -24,7 +24,7 @@ xorg-server-xwayland
 wlc
 
 ## Display & Utilities
-#lightdm
+lightdm
 nvidia-dkms
 vulkan-radeon
 qt5-svg
