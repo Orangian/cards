@@ -45,6 +45,7 @@ libx11
 i3lock-color
 libxkbcommon>=0.5.0
 libxkbcommon-x11>=0.5.0
+ncdu
 
 ## Pantheon
 #capnet-assist
