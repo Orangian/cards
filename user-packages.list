@@ -14,6 +14,7 @@ libva
 libva-mesa-driver
 intel-ucode
 intel-tbb
+mcookie
 
 ## Wayland
 wayland
@@ -36,6 +37,12 @@ pkg-config
 pam
 archlinux-keyring
 ncdu
+libxcb
+xcb-util
+tput
+shutdown
+glibc
+gcc
 
 ## Pantheon
 #capnet-assist
