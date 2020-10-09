@@ -45,6 +45,8 @@ echo "---"
 cat ${HOME}/purged-releng.list >> ${PROFILE}/packages.x86_64
 # Add custom packages to our profile
 cat ${HOME}/user-packages.list >> ${PROFILE}/packages.x86_64
+# Add AUR packages to our profile
+cat ${HOME}/aur-packages.list >> ${PROFILE}/packages.x86_64
 
 rm -f ${PROFILE}/airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf # Remove autologin
 
