@@ -14,7 +14,6 @@ libva
 libva-mesa-driver
 intel-ucode
 intel-tbb
-mcookie
 
 ## Wayland
 wayland
@@ -38,8 +37,7 @@ archlinux-keyring
 ncdu
 libxcb
 xcb-util
-tput
-shutdown
+ncurses
 glibc
 gcc
 
