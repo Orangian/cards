@@ -7,7 +7,7 @@ umask 0022 # Correct file permissions
 systemd-machine-id-setup # Prevents errors when building AUR packages
 
 pacman -Syu archiso git base-devel jq expac diffstat pacutils wget devtools libxslt cmake \
-intltool mesa gtk-doc gobject-introspection gnome-common polkit dbus-glib go pkg-config libxcb xcb-util pam cairo libglvnd libev libx11 libxkbcommon>=0.5.0 libxkbcommon-x11>=0.5.0 --noconfirm --noprogressbar # Install packages we'll need to build
+intltool mesa gtk-doc gobject-introspection gnome-common polkit dbus-glib go pkg-config libxcb xcb-util pam cairo libglvnd libev tput shutdown mcookie xorg x-auth glibc gcc libx11 libxkbcommon>=0.5.0 libxkbcommon-x11>=0.5.0 --noconfirm --noprogressbar # Install packages we'll need to build
 
 # Allow us to use a standard user account w/ password-less sudo privilege (for building AUR packages later)
 tee -a /etc/sudoers > /dev/null <<EOT
