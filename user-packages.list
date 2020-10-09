@@ -41,6 +41,7 @@ xcb-util
 ncurses
 glibc
 gcc
+i3-gaps
 
 ## Pantheon
 #capnet-assist
