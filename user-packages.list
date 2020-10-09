@@ -5,6 +5,7 @@ xorg-drivers
 xorg-xinit
 xorg-xclock
 xorg-twm
+xorg-xauth
 xterm
 xf86-input-libinput
 mesa
