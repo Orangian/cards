@@ -44,6 +44,25 @@ gcc
 rofi
 scrot
 mpd
+termite
+thunar
+geany
+firefox
+lxmusic
+xfce4-settings-manager
+xbacklight
+dunst
+acpi
+xfce-power-manager-settings
+mpc
+dnsutils
+nmcli
+nmtui
+bmon
+nm-connection-editor
+maim
+viewnoir
+amixer
 
 ## Pantheon
 #capnet-assist
