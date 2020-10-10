@@ -21,6 +21,7 @@ mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we
 #pacman -Rdd gsettings-desktop-schemas
 pwd
 sudo mkdir /go
+sudo mkdir /go/pkg
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
 ymuse-git \
 "
