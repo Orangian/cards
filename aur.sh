@@ -23,6 +23,7 @@ pwd
 sudo mkdir /go
 sudo mkdir /go/pkg
 sudo mkdir /go/pkg/mod
+sudo mkdir /go/pkg/mod/cache
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
 ymuse-git \
 "
