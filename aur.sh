@@ -26,7 +26,8 @@ openbox-patched \
 rofi-git \
 rofi-calc \
 oranchelo-icon-theme-git \
-tela-icon-theme-git"
+tela-icon-theme-git \
+ymuse"
 
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
