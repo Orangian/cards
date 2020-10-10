@@ -104,6 +104,8 @@ pulseaudio-bluetooth
 ## Themeing
 papirus-icon-theme
 obconf
+noto-fonts
+ttf-fantasque-sans-mono
 
 ## VirtualBox
 virtualbox-guest-utils
