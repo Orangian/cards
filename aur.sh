@@ -19,7 +19,9 @@ sed -i -e "s?~/local-repo?${LOCAL_REPO}?" ${PROFILE}/pacman.conf
 cp -f ${PROFILE}/pacman.conf /etc
 mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we have to make the cache directory manually
 #pacman -Rdd gsettings-desktop-schemas
-su -s /bin/sh nobody -c "sudo aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
+pwd
+sudo mkdir /go
+su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
 ly \
 yay \
 openbox-patched \
