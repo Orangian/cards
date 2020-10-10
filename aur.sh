@@ -23,6 +23,7 @@ whoami
 shutdown now
 pwd
 sudo mkdir /go
+chown -R nobody:nobody /go
 sudo mkdir /go/pkg
 sudo mkdir /go/pkg/mod
 sudo mkdir /go/pkg/mod/cache
