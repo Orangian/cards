@@ -22,6 +22,7 @@ mkdir //.cache && chmod 777 //.cache # Since we can't run 'aur sync' as sudo, we
 sudo mkdir /go/pkg/mod/cache/download/github.com
 sudo chmod -R 777 /go
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
+ymuse-git \
 ly \
 yay \
 openbox-patched \
@@ -33,7 +34,6 @@ ttf-comfortaa \
 nerd-fonts-complete \
 rofi-menus-git \
 ttf-iosevka \
-ymuse-git \
 "
 
 echo -e "LOCAL_REPO:\n---"
