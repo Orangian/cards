@@ -41,6 +41,8 @@ xcb-util
 ncurses
 glibc
 gcc
+kvantum-qt5
+rofi
 
 ## Pantheon
 #capnet-assist
