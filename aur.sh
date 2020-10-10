@@ -27,7 +27,12 @@ rofi-git \
 rofi-calc \
 oranchelo-icon-theme-git \
 tela-icon-theme-git \
-ymuse"
+ymuse \
+ttf-comfortaa \
+nerd-fonts-complete \
+rofi-menus-git \
+ttf-iosevka \
+"
 
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
