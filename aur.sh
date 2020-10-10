@@ -24,17 +24,6 @@ sudo chmod -R 777 /go
 sudo chmod -R 777 /go/pkg/mod/cache/download/github.com
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
 ymuse-git \
-ly \
-yay \
-openbox-patched \
-rofi-git \
-rofi-calc \
-oranchelo-icon-theme-git \
-tela-icon-theme-git \
-ttf-comfortaa \
-nerd-fonts-complete \
-rofi-menus-git \
-ttf-iosevka \
 "
 
 echo -e "LOCAL_REPO:\n---"
