@@ -29,6 +29,17 @@ sudo mkdir /go/pkg/mod
 sudo mkdir /go/pkg/mod/cache
 sudo mkdir /go/pkg/mod/cache/download
 su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --noview \
+ly \
+yay \
+openbox-patched \
+rofi-git \
+rofi-calc \
+oranchelo-icon-theme-git \
+tela-icon-theme-git \
+ttf-comfortaa \
+nerd-fonts-complete \
+rofi-menus-git \
+ttf-iosevka \
 ymuse-git \
 "
 
