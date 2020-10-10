@@ -106,6 +106,7 @@ papirus-icon-theme
 obconf
 noto-fonts
 ttf-fantasque-sans-mono
+lxappearance
 
 ## VirtualBox
 virtualbox-guest-utils
