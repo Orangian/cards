@@ -49,20 +49,20 @@ thunar
 geany
 firefox
 lxmusic
-xfce4-settings-manager
-xbacklight
+xfce4-settings
+xorg-xbacklight
 dunst
 acpi
-xfce-power-manager-settings
+acpid
+xfce4-power-manager
 mpc
 dnsutils
-nmcli
-nmtui
+networkmanager
 bmon
 nm-connection-editor
 maim
-viewnoir
-amixer
+viewnior
+alsa-utils
 
 ## Pantheon
 #capnet-assist
