@@ -23,8 +23,10 @@ su -s /bin/sh nobody -c "aur sync -d custom --root ${LOCAL_REPO} --no-confirm --
 ly \
 yay \
 openbox-patched \
-rofi \
-rofi-calc"
+rofi-git \
+rofi-calc \
+oranchelo-icon-theme-git \
+tela-icon-theme-git"
 
 echo -e "LOCAL_REPO:\n---"
 ls ${LOCAL_REPO}
