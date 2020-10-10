@@ -43,6 +43,8 @@ glibc
 gcc
 kvantum-qt5
 rofi
+scrot
+mpd
 
 ## Pantheon
 #capnet-assist
@@ -99,6 +101,9 @@ pulseaudio-bluetooth
 #wingpanel-indicator-datetime
 #wingpanel-indicator-power
 #wingpanel-indicator-session
+
+## Themeing
+papirus-icon-theme
 
 ## VirtualBox
 virtualbox-guest-utils
