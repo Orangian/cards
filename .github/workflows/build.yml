@@ -28,6 +28,11 @@ jobs:
     - name: Clone build scripts
       uses: actions/checkout@v1
       
+    - name: Run Tests
+      run: |
+        chmod +x ./test.sh
+        ./test.sh      
+      
     - name: Setup Build Environment
       run: |
         chmod +x ./setup.sh
