@@ -29,7 +29,6 @@ oranchelo-icon-theme-git \
 tela-icon-theme-git \
 ymuse \
 ttf-comfortaa \
-nerd-fonts-complete \
 rofi-menus-git \
 ttf-iosevka \
 "
