@@ -1,6 +1,7 @@
 name: Build Cards
 
 on:
+  push:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
