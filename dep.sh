@@ -1,1 +1,1 @@
-pacman -Sy sudo --noconfirm
+pacman -Sy sudo git --noconfirm
