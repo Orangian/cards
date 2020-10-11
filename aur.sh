@@ -28,7 +28,6 @@ ymuse-git \
 ly \
 yay \
 openbox-patched \
-rofi-git \
 rofi-calc \
 oranchelo-icon-theme-git \
 tela-icon-theme-git \
