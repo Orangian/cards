@@ -40,8 +40,9 @@ jobs:
         ./dep.sh
         chmod +x ./setup.sh
         ./setup.sh
-        chmod +x /iso/build.sh
-        sudo ./iso/build.sh -v
+        cd iso
+        chmod +x ./build.sh
+        sudo ./build.sh -v
     - name: Upload disk image
       uses: actions/upload-artifact@v2.1.4
       with:
