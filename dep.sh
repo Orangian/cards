@@ -1,1 +1,1 @@
-pacman -Sy sudo
+pacman -Sy sudo --noconfirm
