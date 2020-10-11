@@ -36,6 +36,8 @@ jobs:
 
     - name: Build & bundle disk image
       run: |
+        chmod +x ./dep.sh
+        ./dep.sh
         chmod +x ./setup.sh
         ./setup.sh
         
