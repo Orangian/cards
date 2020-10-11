@@ -32,7 +32,6 @@ rofi-calc \
 oranchelo-icon-theme-git \
 tela-icon-theme-git \
 ttf-comfortaa \
-rofi-menus-git \
 ttf-iosevka \
 "
 
